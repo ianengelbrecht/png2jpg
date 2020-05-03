@@ -14,8 +14,10 @@
   "dependencies": {
     "commander": "^5.1.0",
     "fs-extra": "^9.0.0",
+    "get-image-colors": "^2.0.1",
     "jimp": "^0.10.3",
-    "paralleljs": "^0.2.1",
-    "progress": "^2.0.3"
+    "pretty-ms": "^7.0.0",
+    "progress": "^2.0.3",
+    "workerpool": "^5.0.4"
   }
 }
