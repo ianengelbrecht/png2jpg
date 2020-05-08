@@ -11,6 +11,15 @@ const distinct = (value, index, self) => self.indexOf(value) === index
 async function png2jpg(pngPath) {
   let fileName = path.basename(pngPath).replace(path.extname(pngPath), "")
   let dirPath = path.dirname(pngPath) 
+
+  //we want all jpgs in one place - let's build the path
+  let pathParts = dirPath.split(path.sep)
+  let holder = []
+  holder.unshift(pathParts.pop())
+  holder.unshift(pathParts.pop())
+  pathParts.push('jpg')
+  dirPath = path.join(...pathParts, ...holder)
+
   let file
   try{
     file = await jimp.read(pngPath)

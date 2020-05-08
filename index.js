@@ -13,7 +13,7 @@ const pool = workerpool.pool(__dirname + '/worker.js', {maxWorkers: 6})
 const isDirectory = itemPath => fs.lstatSync(itemPath).isDirectory()
 
 program
-.option('-p,--png-path <pngPath>', 'Path to png files')
+.option('-p,--png-path <pngPath>', 'Path to png files --must be one of the zoom level folders')
 .parse(process.argv)
 
 if(program.pngPath && program.pngPath.trim()) {
@@ -34,7 +34,7 @@ if(program.pngPath && program.pngPath.trim()) {
 
   fs.readdir(imageDir).then(async dirlist => {
 
-    let subdirs = dirlist.filter(x => isDirectory(path.join(imageDir, x)))
+    let subdirs = dirlist.filter(x => isDirectory(path.join(imageDir, x))) //these are the 'xs' of the /{z}/{x}/{y} format for maptiles
 
     let bar = new ProgressBar('[:bar] :current/:total :percent', { width: 50, total: subdirs.length })
 
