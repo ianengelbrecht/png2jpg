@@ -9,7 +9,6 @@ const program = require('commander')
 var workerpool = require('workerpool')
 const prettyms = require('pretty-ms');
  
-const pool = workerpool.pool(__dirname + '/worker.js', {maxWorkers: 6})
 const isDirectory = itemPath => fs.lstatSync(itemPath).isDirectory()
 
 program
@@ -33,6 +32,8 @@ if(program.pngPath && program.pngPath.trim()) {
   performance.mark('start');
 
   fs.readdir(imageDir).then(async dirlist => {
+
+    const pool = workerpool.pool(__dirname + '/worker.js')
 
     let subdirs = dirlist.filter(x => isDirectory(path.join(imageDir, x))) //these are the 'xs' of the /{z}/{x}/{y} format for maptiles
 
